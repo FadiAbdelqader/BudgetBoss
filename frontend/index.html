@@ -1,12 +1,110 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>front</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="budgetBossStyle.css">
+    <meta charset="UTF-8">
+    <title>BUDGETBOSS</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.10/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+<div id="app">
+    <div id="nav">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-purple header fixed-top">
+            <a style=" color: darkorange" class="navbar-brand" href="#"><b>BudgetBoss</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a style=" color: darkorange" class="nav-link text-orange" href="#">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style=" color: darkorange" class="nav-link text-orange" href="#">À propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style=" color: darkorange" class="nav-link text-orange" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" id="email" placeholder="Adresse e-mail" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="password" required placeholder="mot de passe" required>
+            </div>
+            <button type="submit" class="btn btn-warning btn-block">Connexion </button>
+        </nav>
+    </div>
+
+        <!-- Inner -->
+        <div class="carousel-inner">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp" class="d-block w-100" alt="Sunset Over the City"/>
+        </div>
+    </div>
+    <!-- Carousel wrapper -->
+<br><br>
+    <!-- Contenu principal -->
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-md-4">
+                <b><h1>BudgetBoss</h1></b>
+                <i><p>SAVE YOUR CASH FOR ANOTHER DAY!</p></i>
+                <div id="description ">
+                <p>
+                    Bienvenue sur BudgetBoss, l'outil en ligne qui vous permet de prendre le contrôle de vos finances personnelles ou professionnelles. Avec notre plateforme intuitive, vous pouvez créer des budgets personnalisés, suivre vos dépenses et visualiser vos transactions en un seul endroit pratique.
+
+                    Notre équipe d'experts en finance a créé des outils avancés pour vous aider à économiser de l'argent et à atteindre vos objectifs financiers. Grâce à notre fonction de notification, vous pouvez recevoir des alertes en temps réel lorsque vous atteignez des limites de dépenses prédéfinies ou lorsque vous avez besoin de réévaluer votre budget. Vous pouvez également visualiser vos transactions sous forme de graphiques, pour mieux comprendre vos habitudes de dépenses et trouver des moyens d'économiser de l'argent.
+
+                    Nous savons que la gestion de l'argent peut être stressante, c'est pourquoi nous avons créé une plateforme facile à utiliser pour vous aider à rester organisé et concentré sur vos objectifs financiers. Avec BudgetBoss, vous pouvez suivre vos progrès et obtenir des conseils personnalisés pour améliorer votre situation financière.
+
+                    Rejoignez la communauté de nos utilisateurs satisfaits dès maintenant et commencez à prendre le contrôle de votre budget avec BudgetBoss. Inscrivez-vous gratuitement dès aujourd'hui et commencez à économiser de l'argent dès maintenant !
+                </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <img src="logoBudgetboss%20(2).png">
+            </div>
+            <div class="col-md-4">
+                <h3>Inscription</h3>
+                <!-- Formulaire d'inscription -->
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="firstName" placeholder="Entrez votre prénom"
+                               required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="lastName" placeholder="Entrez votre nom" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" placeholder="Entrez votre adresse e-mail"
+                               required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password"
+                               placeholder="Entrez votre mot de passe" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Inscription</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<footer class="bg-primary"></footer>
+
+</body>
 </html>
