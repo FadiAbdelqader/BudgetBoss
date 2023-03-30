@@ -132,3 +132,6 @@ export default {
   },
 };
 </script>
+<style>
+@import "../../assets/budgetTracker/btracker.css";
+</style>

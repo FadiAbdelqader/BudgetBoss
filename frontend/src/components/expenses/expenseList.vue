@@ -2,6 +2,7 @@
   <div class="container">
     <h1>List of Expenses</h1>
     <div id="chart"></div>
+    <br />
     <table class="table">
       <thead>
         <tr>
@@ -147,6 +148,12 @@ export default {
       const layout = {
         height: 400,
         margin: { t: 0, b: 0, l: 0, r: 0 },
+        paper_bgcolor: "rgba(0,0,0,0)", // Définit la couleur de fond du papier comme transparent
+        plot_bgcolor: "rgba(0,0,0,0)", // Définit la couleur de fond de la zone de traçage comme transparent
+
+        font: {
+          color: "#FFFFFF", // Définit la couleur de la police en blanc
+        },
       };
 
       // Plot chart
@@ -157,112 +164,5 @@ export default {
 </script>
 
 <style>
-.container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-}
-
-h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.table {
-  width: 100%;
-  margin-bottom: 20px;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-.table th {
-  background-color: #f7f7f7;
-  border-bottom: 2px solid #ddd;
-  text-align: left;
-  padding: 8px;
-}
-
-.table td {
-  border-bottom: 1px solid #ddd;
-  padding: 8px;
-}
-
-.btn {
-  display: inline-block;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.btn:hover {
-  background-color: #0056b3;
-}
-
-.btn-primary {
-  background-color: #007bff;
-}
-
-.btn-success {
-  background-color: #28a745;
-}
-
-.btn-danger {
-  background-color: #dc3545;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  font-size: 1rem;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-group input {
-  font-size: 1rem;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.form-group select {
-  font-size: 1rem;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.form-group button {
-  display: block;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  margin-top: 20px;
-}
-
-.form-group button:hover {
-  background-color: #0056b3;
-}
+@import "../../assets/budgetTracker/btracker.css";
 </style>
