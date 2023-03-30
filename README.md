@@ -30,6 +30,7 @@ Pour lancer le projet vous devrez:
 ```
 
 allez sur ```http://localhost:8080/tobuy``` pour tester la feature tobuy list
+
 allez sur ```http://localhost:8080/expenses``` pour tester la feature add expenses
 
 
