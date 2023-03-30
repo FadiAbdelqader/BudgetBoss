@@ -9,13 +9,15 @@
 
 ## Project Start
 
-Pour lancer le projet vous devriez cloner le projet :
+Pour lancer le projet vous devrez:
+
+-   cloner le projet :
 
 ```java
     git clone https://github.com/FadiAbdelqader/BudgetBoss
 ```
 
-- ensuite taper les commandes suivantes :
+-   ensuite taper les commandes suivantes :
 
 ```java 
     cd backend
@@ -26,3 +28,8 @@ Pour lancer le projet vous devriez cloner le projet :
     npm install
     npm start
 ```
+
+allez sur ```http://localhost:8080/tobuy``` pour tester la feature tobuy list
+allez sur ```http://localhost:8080/expenses``` pour tester la feature add expenses
+
+
