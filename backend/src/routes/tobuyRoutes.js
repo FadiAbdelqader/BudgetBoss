@@ -12,7 +12,8 @@ router.get('/:id', tobuyController.getTobuyById);
 // Create an expense
 router.post('/', tobuyController.createTobuy);
 
-
+// Delete an expense
+router.delete('/:id', tobuyController.deleteTobuyByID);
 
 /*
 // Get all expenses

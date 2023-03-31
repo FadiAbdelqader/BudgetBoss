@@ -4,7 +4,7 @@
             To-Buy List
         </h1>
         <div class="menu">
-            <p class="tasks-left-text"> {{ incompletedTodos.length }} task(s) left! / {{ getAll.length }} </p>
+            <p class="tasks-left-text"> {{ incompletedTodos.length }} task(s) left! / {{ todos.length }} </p>
             <button @click="showAll = !showAll" class="determine-todos">
                 {{ showAll ? 'Hide Completed' : 'Show All' }}
             </button>
@@ -17,7 +17,10 @@
             @keyup.enter="addTodo"
             v-model = "tobuyObject.name"
         > 
-        <div v-for="todo in filteredTodos" :key="todo.id" class="todo-item">
+
+
+
+        <div v-for="todo in filteredTodos" :key="todo._id" class="todo-item">
             <label class="checkbox-container">
                 <input 
                     type="checkbox"
@@ -25,7 +28,7 @@
                     >
                 <span class="checkbox"> </span>
             </label>
-            <p :class="{ completed: todo.completed }"> {{ todo.task }} </p>
+            <p :class="{ completed: todo.completed }"> {{ todo.name }} </p>
             <button @click="removeTodo(todo)" class="delete-button"> X </button>
         </div> 
     </dev>
@@ -45,12 +48,13 @@
             },
             data() {               
                 return {
-                    todosList: [],
-                    todos: JSON.parse(localStorage.getItem("todos") || '[]'),
-                    id: JSON.parse(localStorage.getItem("id") || 0 ),
+                    todos: [],
                     showAll: false,
                 }
-          }, 
+            },
+            async created() {
+                await this.getAll();
+            },
   
           computed: {
                 filteredTodos() {
@@ -58,64 +62,35 @@
                 },
                 incompletedTodos() {
                     return this.todos.filter((t) => !t.completed)
-                },
+                }
+              },
+          methods: {
                 async getAll(){
                     try{
-                        const response = await api.post("/todos",this.todosList);
-                        this.todosList = response.data;
+                        const response = await api.get("/todos");
+                        this.todos = response.data;
                     }
                     catch(e){
                         console.log(e)
-                    }
-                    return this.todos;    
-                }
-          },
-  
-          watch: {
-                todos: {
-                    handler(todos) {
-                        localStorage.setItem("todos", JSON.stringify(todos))
-                    },
-                    deep: true
-                }, 
-                id: {
-                    handler(id) {
-                        localStorage.setItem("id", id)
-                    }
-                }
-          },
-  
-          methods: {
-                async addTodo(e) {
+                    } 
+                },
+                async addTodo(e){
                     const value = e.target.value.trim()
                     console.log(value)
                     if (value === "") {
                         return;
-                    }      
-                    this.todos.push({
-                        id: this.id++,
-                        task: value,
-                        completed: false,
-                    })
+                    }
                     this.tobuyObject.name = value;
                     await api.post("/todos", this.tobuyObject);
+                    this.getAll();
                     e.target.value = ''
-                }, 
-
-                async getTodos(){
-                    const response = await api.get("/todos");
-                    this.todos = response.data;
                 },
                 async removeTodo(todo) {
-                    // Removes a todo from the array at the index of todo and of 1 obj
-                    this.todos.splice(this.todos.indexOf(todo), 1)
-    
-                    // Resets id counter to 0 if array is empty
-                    if (this.todos.length === 0) {
-                        this.id = 0
-                        localStorage.setItem("id", 0)
-                    }
-                    await api.delete(`/todos/${id}`);
+                    
+                    this.todos.splice(this.todos.indexOf(todo), 1);
+                    console.log(todo._id);
+                    console.log("fff");
+                    await api.delete(`/todos/${todo._id}`);
                 }
           }
       }
