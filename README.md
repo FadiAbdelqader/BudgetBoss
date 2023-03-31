@@ -17,7 +17,7 @@ Pour lancer le projet vous devrez:
     git clone https://github.com/FadiAbdelqader/BudgetBoss
 ```
 
--   ensuite taper les commandes suivantes :
+-   taper les commandes suivantes depuis la base du projet:
 
 ```java 
     cd backend
@@ -28,6 +28,17 @@ Pour lancer le projet vous devrez:
     npm install
     npm start
 ```
+
+-   MangoDB. 
+
+Vous aurez besoin d'avoir MangoDB d'installer localement pour tester les features.
+
+Rendez-vous ici pour l'installation et le lancement du serveur : [MangoDB](https://www.mongodb.com/docs/manual/administration/install-community/)
+
+Ensuite, vous pourrez créer une connexion à l'URL suivante : mongodb://localhost:27017.
+
+
+-   Tester les features 
 
 allez sur ```http://localhost:8080/tobuy``` pour tester la feature tobuy list
 
