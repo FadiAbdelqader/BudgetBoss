@@ -134,4 +134,13 @@ export default {
 </script>
 <style>
 @import "../../assets/budgetTracker/btracker.css";
+
+.form-control{
+  background-color: black;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: white;
+  margin: 8px 0px;
+
+}
 </style>
