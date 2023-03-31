@@ -25,7 +25,7 @@ exports.getAllTobuys = async (req, res) => {
   exports.createTobuy = async (req, res) => {
     const tobuy = new Tobuy({
       name: req.body.name,
-      //date: req.body.date
+      category: req.body.category,
       date: new Date()
     });
   
