@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const expenseRoutes = require('./src/routes/expenseRoutes');
+const tobuyRoutes = require('./src/routes/tobuyRoutes');
 const cors = require('cors');
 
 const app = express();
@@ -21,6 +22,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(bodyParser.json());
+app.use('/todos', tobuyRoutes);
 app.use('/expenses', expenseRoutes);
 
 app.listen(PORT, () => {
