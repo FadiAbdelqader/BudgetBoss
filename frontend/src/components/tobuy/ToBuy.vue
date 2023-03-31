@@ -9,24 +9,26 @@
                 {{ showAll ? 'Hide Completed' : 'Show All' }}
             </button>
         </div>
-    
-
-            <input 
-                autofocus
-                class="add-task"
-                placeholder="Add a new task"
-                @keyup.enter="addTodo"
-                v-model = "tobuyObject.name"
-            > 
-            <div class="selectDiv"> Category
-                <select class="selectList" id="category" v-model="tobuyObject.category">
-                    <option v-for="category in categories" :key="category">
-                    {{ category }}
-                    </option>
-                </select>
+        <div class="parentSelectInput">
+            <div class="childInput">
+                <input 
+                    autofocus
+                    class="add-task"
+                    placeholder="Add a new task"
+                    @keyup.enter="addTodo"
+                    v-model = "tobuyObject.name"
+                > 
             </div>
-
-
+            <div>
+                <div class="childSelect"> 
+                    <select class="selectList" id="category" v-model="tobuyObject.category">
+                        <option v-for="category in categories" :key="category">
+                        {{ category }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
         <div v-for="todo in filteredTodos" :key="todo._id" class="todo-item">
             <label class="checkbox-container">
                 <input 
@@ -188,6 +190,7 @@
   
       .add-task::placeholder {
           font-size: 14px;
+          text-align: center;
       }
   
       .add-task:focus {
@@ -284,4 +287,22 @@
           color: white;
           font-size: 18px;
       }
+
+        .parentSelectInput {
+        margin: 1rem;
+        padding: 2rem 2rem;
+        text-align: center;
+        }
+        .childInput {
+        width:100%; 
+        display: inline-block;
+        padding: 1rem 1rem;
+        vertical-align: middle;
+        }
+
+        .childSelect {
+        display: inline-block;
+        padding: 1rem 1rem;
+        vertical-align: middle;
+        }
   </style>
