@@ -1,0 +1,202 @@
+:root {
+    --vt-c-white: #ffffff;
+    --vt-c-white-soft: #f8f8f8;
+    --vt-c-white-mute: #f2f2f2;
+
+    --vt-c-black: #181818;
+    --vt-c-black-soft: #222222;
+    --vt-c-black-mute: #282828;
+
+    --vt-c-indigo: #2c3e50;
+
+    --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
+    --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
+    --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+    --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+    --vt-c-text-light-1: var(--vt-c-indigo);
+    --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
+    --vt-c-text-dark-1: var(--vt-c-white);
+    --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+}
+
+:root {
+    --color-background: var(--vt-c-black);
+    --color-background-soft: var(--vt-c-black-soft);
+    --color-background-mute: var(--vt-c-black-mute);
+
+    --color-border: var(--vt-c-divider-dark-2);
+    --color-border-hover: var(--vt-c-divider-dark-1);
+
+    --color-heading: var(--vt-c-text-dark-1);
+    --color-text: var(--vt-c-text-dark-2);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    position: relative;
+    font-weight: normal;
+}
+.form-inline label {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.form-inline input[type="date"] {
+  display: inline-block;
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+.form-inline .button-container {
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+body {
+    min-height: 100vh;
+    color: var(--color-text);
+    background: var(--color-background);
+    transition: color 0.5s, background-color 0.5s;
+    line-height: 1.6;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+        Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1600px;
+    background-color: #222222;
+    width: 100%;
+    overflow: hidden; /* nécessaire pour que la div de conteneur s'ajuste à la hauteur des divs à l'intérieur */
+  }
+  
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .mychart {
+    float: left;
+    width: 50%; /* ou une autre valeur selon la largeur souhaitée */
+  }
+  
+  .filterForm {
+    float: right;
+    width: 50%; /* ou une autre valeur selon la largeur souhaitée */
+  }
+  
+  .table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    color: white;
+  }
+  
+  .table th {
+    background-color: #222222;
+    border-bottom: 2px solid #000000;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  .table td {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  h1 {
+    font-weight: bold;
+    color: white;
+    padding: 8px 16px;
+    background-color: rgb(57, 57, 57);
+    border: solid grey;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input[type="date"] {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  .btn-primary {
+    background-color: #6c757d;
+  }
+  
+  .btn-primary:hover {
+    background-color: #5a6268;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+
+  .btn-danger {
+    background-color: #6c757d;
+  }
+  .btn-danger:hover {
+    background-color: #5a6268;
+  }
+
+  .btn-success {
+    background-color: #6c757d;
+  }
+  .btn-success:hover {
+    background-color: #5a6268;
+  }
+
+
