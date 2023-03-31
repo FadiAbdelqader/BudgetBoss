@@ -1,41 +1,87 @@
 <template>
-  <div class="container">
-    <h1>List of Expenses</h1>
-    <div id="chart"></div>
-    <br />
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Amount</th>
-          <th>Category</th>
-          <th>Date</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="expense in expenses" :key="expense._id">
-          <td>{{ expense.name }}</td>
-          <td>{{ expense.amount }}</td>
-          <td>{{ expense.category }}</td>
-          <td>{{ formatDate(expense.date) }}</td>
-          <td>
-            <button class="btn btn-primary" @click="editExpense(expense)">Edit</button>
-            <button class="btn btn-danger" @click="deleteExpense(expense._id)">
-              Delete
+  <dev>
+    <div>
+      <h1>Liste des dépenses</h1>
+    </div>
+
+    <div class="container">
+      <br />
+      <div class="mychart" id="chart">
+        <br />
+      </div>
+      <br />
+      <div class="filterForm">
+        <form @submit.prevent="getExpensesByDateRange">
+          <div class="form-group">
+            <label for="startDate">De :</label>
+            <div class="input-container">
+              <input type="date" id="startDate" v-model="startDate" />
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="endDate">A :</label>
+            <div class="input-container">
+              <input type="date" id="endDate" v-model="endDate" />
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+          </div>
+          <div class="button-container">
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-filter"></i>
+              Filtre par date
             </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <button class="btn btn-success" @click="showExpenseForm()">Add Expense</button>
-    <expense-form
-      v-if="showForm"
-      :expense="selectedExpense"
-      :closeForm="closeExpenseForm"
-      :getExpenses="getExpenses"
-    ></expense-form>
-  </div>
+            <button class="btn btn-secondary" @click="resetDateFilter()">
+              <i class="fas fa-undo"></i>
+              Annuler
+            </button>
+          </div>
+        </form>
+        <br />
+      </div>
+      <br />
+    </div>
+    <br />
+    <br />
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Dépense</th>
+            <th>Categorie</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="expense in expenses" :key="expense._id">
+            <td>{{ expense.name }}</td>
+            <td>{{ expense.amount }}</td>
+            <td>{{ expense.category }}</td>
+            <td>{{ formatDate(expense.date) }}</td>
+            <td>
+              <button class="btn btn-primary" @click="editExpense(expense)">
+                Modifier
+              </button>
+              <button class="btn btn-danger" @click="deleteExpense(expense._id)">
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-success" @click="showExpenseForm()">
+        Ajouter une dépense
+      </button>
+      <expense-form
+        v-if="showForm"
+        :expense="selectedExpense"
+        :closeForm="closeExpenseForm"
+        :getExpenses="getExpenses"
+      ></expense-form>
+    </div>
+  </dev>
 </template>
 
 <script>
@@ -49,10 +95,19 @@ export default {
     ExpenseForm,
   },
   data() {
+    const now = new Date();
+    const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1)
+      .toISOString()
+      .substr(0, 10);
+    const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0)
+      .toISOString()
+      .substr(0, 10);
     return {
       expenses: [],
       selectedExpense: null,
       showForm: false,
+      startDate: firstDayOfMonth,
+      endDate: lastDayOfMonth,
     };
   },
   async created() {
@@ -70,6 +125,26 @@ export default {
         console.log(error);
       }
     },
+    async getExpensesByDateRange() {
+      try {
+        const response = await api.get("/expenses/by-date-range", {
+          params: {
+            startDate: this.startDate,
+            endDate: this.endDate,
+          },
+        });
+        this.expenses = response.data;
+        this.renderChart();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    resetDateFilter() {
+      this.startDate = null;
+      this.endDate = null;
+      this.getExpenses();
+    },
+
     async deleteExpense(id) {
       try {
         await api.delete(`/expenses/${id}`);

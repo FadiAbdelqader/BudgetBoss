@@ -77,3 +77,20 @@ exports.deleteExpenseById = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+exports.getExpensesByDateRange = async (req, res) => {
+  try {
+    const startDate = new Date(req.query.startDate);
+    const endDate = new Date(req.query.endDate);
+    endDate.setDate(endDate.getDate() + 1);
+    const expenses = await Expense.find({
+      date: {
+        $gte: startDate,
+        $lt: endDate,
+      },
+    });
+    res.json(expenses);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

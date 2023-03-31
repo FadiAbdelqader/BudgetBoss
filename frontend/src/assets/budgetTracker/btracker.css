@@ -40,6 +40,21 @@
     position: relative;
     font-weight: normal;
 }
+.form-inline label {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.form-inline input[type="date"] {
+  display: inline-block;
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+.form-inline .button-container {
+  display: inline-block;
+  margin-left: 0.5rem;
+}
 
 body {
     min-height: 100vh;
@@ -56,15 +71,26 @@ body {
 }
 
 .container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
+    max-width: 1600px;
+    background-color: #222222;
+    width: 100%;
+    overflow: hidden; /* nécessaire pour que la div de conteneur s'ajuste à la hauteur des divs à l'intérieur */
   }
   
   h1 {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 20px;
+  }
+  
+  .mychart {
+    float: left;
+    width: 50%; /* ou une autre valeur selon la largeur souhaitée */
+  }
+  
+  .filterForm {
+    float: right;
+    width: 50%; /* ou une autre valeur selon la largeur souhaitée */
   }
   
   .table {
@@ -87,81 +113,90 @@ body {
     padding: 8px;
   }
   
-  .btn {
-    display: inline-block;
-    font-size: 1rem;
+  h1 {
     font-weight: bold;
-    text-transform: uppercase;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
+    color: white;
     padding: 8px 16px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    background-color: rgb(57, 57, 57);
+    border: solid grey;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    text-align: center;
   }
   
-  .btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-  }
-  
-  .btn-success {
-    background-color: #28a745;
-  }
-  
-  .btn-danger {
-    background-color: #dc3545;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
   }
   
   .form-group {
-    margin-bottom: 20px;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   
-  .form-group label {
-    font-size: 1rem;
-    font-weight: bold;
-    display: block;
+  label {
     margin-bottom: 5px;
-  }
-  
-  .form-group input {
-    font-size: 1rem;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .form-group select {
-    font-size: 1rem;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .form-group button {
-    display: block;
-    font-size: 1rem;
     font-weight: bold;
-    text-transform: uppercase;
-    color: #fff;
-    background-color: #007bff;
+  }
+  
+  input[type="date"] {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
     border: none;
     border-radius: 5px;
-    padding: 8px 16px;
+    color: #fff;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    margin-top: 20px;
+    margin: 10px;
   }
   
-  .form-group button:hover {
-    background-color: #0056b3;
+  .btn-primary {
+    background-color: #6c757d;
   }
   
+  .btn-primary:hover {
+    background-color: #5a6268;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+
+  .btn-danger {
+    background-color: #6c757d;
+  }
+  .btn-danger:hover {
+    background-color: #5a6268;
+  }
+
+  .btn-success {
+    background-color: #6c757d;
+  }
+  .btn-success:hover {
+    background-color: #5a6268;
+  }
+
+
