@@ -23,7 +23,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(bodyParser.json());
 app.use('/todos', tobuyRoutes);
-app.use('/expenses', expenseRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

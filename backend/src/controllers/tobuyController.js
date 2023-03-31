@@ -11,9 +11,9 @@ exports.getAllTobuys = async (req, res) => {
   
   exports.getTobuyById = async (req, res) => {
     try {
-      const tobuy = await ExTobuypense.findById(req.params.id);
+      const tobuy = await Tobuy.findById(req.params.id);
       if (tobuy == null) {
-        return res.status(404).json({ message: 'Expense not found' });
+        return res.status(404).json({ message: 'Tobuy not found' });
       }
       res.json(tobuy);
     } catch (err) {
@@ -34,5 +34,20 @@ exports.getAllTobuys = async (req, res) => {
       res.status(201).json(newTobuy);
     } catch (err) {
       res.status(400).json({ message: err.message });
+    }
+  };
+
+  exports.deleteTobuyByID = async (req, res) => {
+    let tobuy;
+    try {
+      tobuy = await Tobuy.findById(req.params.id);
+      if (tobuy == null) {
+        return res.status(404).json({ message: 'Tobuy not found' });
+      }
+  
+      await tobuy.deleteOne();
+      res.json({ message: 'Tobuy deleted' });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
   };
