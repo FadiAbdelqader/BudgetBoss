@@ -1,40 +1,87 @@
 <template>
-  <div class="container">
-    <h1>List of Expenses</h1>
-    <div id="chart"></div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Amount</th>
-          <th>Category</th>
-          <th>Date</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="expense in expenses" :key="expense._id">
-          <td>{{ expense.name }}</td>
-          <td>{{ expense.amount }}</td>
-          <td>{{ expense.category }}</td>
-          <td>{{ formatDate(expense.date) }}</td>
-          <td>
-            <button class="btn btn-primary" @click="editExpense(expense)">Edit</button>
-            <button class="btn btn-danger" @click="deleteExpense(expense._id)">
-              Delete
+  <dev>
+    <div>
+      <h1>Liste des dépenses</h1>
+    </div>
+
+    <div class="container">
+      <br />
+      <div class="mychart" id="chart">
+        <br />
+      </div>
+      <br />
+      <div class="filterForm">
+        <form @submit.prevent="getExpensesByDateRange">
+          <div class="form-group">
+            <label for="startDate">De :</label>
+            <div class="input-container">
+              <input type="date" id="startDate" v-model="startDate" />
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="endDate">A :</label>
+            <div class="input-container">
+              <input type="date" id="endDate" v-model="endDate" />
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+          </div>
+          <div class="button-container">
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-filter"></i>
+              Filtre par date
             </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <button class="btn btn-success" @click="showExpenseForm()">Add Expense</button>
-    <expense-form
-      v-if="showForm"
-      :expense="selectedExpense"
-      :closeForm="closeExpenseForm"
-      :getExpenses="getExpenses"
-    ></expense-form>
-  </div>
+            <button class="btn btn-secondary" @click="resetDateFilter()">
+              <i class="fas fa-undo"></i>
+              Annuler
+            </button>
+          </div>
+        </form>
+        <br />
+      </div>
+      <br />
+    </div>
+    <br />
+    <br />
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Dépense</th>
+            <th>Categorie</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="expense in expenses" :key="expense._id">
+            <td>{{ expense.name }}</td>
+            <td>{{ expense.amount }}</td>
+            <td>{{ expense.category }}</td>
+            <td>{{ formatDate(expense.date) }}</td>
+            <td>
+              <button class="btn btn-primary" @click="editExpense(expense)">
+                Modifier
+              </button>
+              <button class="btn btn-danger" @click="deleteExpense(expense._id)">
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-success" @click="showExpenseForm()">
+        Ajouter une dépense
+      </button>
+      <expense-form
+        v-if="showForm"
+        :expense="selectedExpense"
+        :closeForm="closeExpenseForm"
+        :getExpenses="getExpenses"
+      ></expense-form>
+    </div>
+  </dev>
 </template>
 
 <script>
@@ -48,10 +95,19 @@ export default {
     ExpenseForm,
   },
   data() {
+    const now = new Date();
+    const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1)
+      .toISOString()
+      .substr(0, 10);
+    const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0)
+      .toISOString()
+      .substr(0, 10);
     return {
       expenses: [],
       selectedExpense: null,
       showForm: false,
+      startDate: firstDayOfMonth,
+      endDate: lastDayOfMonth,
     };
   },
   async created() {
@@ -69,6 +125,26 @@ export default {
         console.log(error);
       }
     },
+    async getExpensesByDateRange() {
+      try {
+        const response = await api.get("/expenses/by-date-range", {
+          params: {
+            startDate: this.startDate,
+            endDate: this.endDate,
+          },
+        });
+        this.expenses = response.data;
+        this.renderChart();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    resetDateFilter() {
+      this.startDate = null;
+      this.endDate = null;
+      this.getExpenses();
+    },
+
     async deleteExpense(id) {
       try {
         await api.delete(`/expenses/${id}`);
@@ -147,6 +223,12 @@ export default {
       const layout = {
         height: 400,
         margin: { t: 0, b: 0, l: 0, r: 0 },
+        paper_bgcolor: "rgba(0,0,0,0)", // Définit la couleur de fond du papier comme transparent
+        plot_bgcolor: "rgba(0,0,0,0)", // Définit la couleur de fond de la zone de traçage comme transparent
+
+        font: {
+          color: "#FFFFFF", // Définit la couleur de la police en blanc
+        },
       };
 
       // Plot chart
@@ -157,112 +239,12 @@ export default {
 </script>
 
 <style>
-.container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-}
-
-h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.table {
-  width: 100%;
-  margin-bottom: 20px;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-.table th {
-  background-color: #f7f7f7;
-  border-bottom: 2px solid #ddd;
-  text-align: left;
-  padding: 8px;
-}
-
-.table td {
-  border-bottom: 1px solid #ddd;
-  padding: 8px;
-}
-
-.btn {
-  display: inline-block;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.btn:hover {
-  background-color: #0056b3;
-}
-
-.btn-primary {
-  background-color: #007bff;
-}
-
-.btn-success {
-  background-color: #28a745;
-}
-
-.btn-danger {
-  background-color: #dc3545;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  font-size: 1rem;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-group input {
-  font-size: 1rem;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.form-group select {
-  font-size: 1rem;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.form-group button {
-  display: block;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  margin-top: 20px;
-}
-
-.form-group button:hover {
-  background-color: #0056b3;
-}
+@import "../../assets/budgetTracker/btracker.css";
 </style>
+
+def knapsack_2d(n, P, V, weights, volumes, utilities): # Initialiser le tableau à deux
+dimensions F = [[0 for j in range(V+1)] for i in range(P+1)] for k in range(n): # Boucler
+sur tous les sous-problèmes for E in range(P+1): for U in range(V+1): # Si l'objet k peut
+être ajouté au sac à dos 1 ou 2 if weights[k] <= E or volumes[k] <= U: # Mettre à jour la
+valeur du sous-problème courant F[E][U] = max(F[E][U], utilities[k] + F[max(0,
+E-weights[k])][max(0, U-volumes[k])])

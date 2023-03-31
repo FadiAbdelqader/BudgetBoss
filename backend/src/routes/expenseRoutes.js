@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const expenseController = require('../controllers/expenseController');
 
+// Get expenses by date
+router.get('/by-date-range', expenseController.getExpensesByDateRange);
+
 // Get all expenses
 router.get('/', expenseController.getAllExpenses);
 
@@ -16,5 +19,6 @@ router.patch('/:id', expenseController.updateExpenseById);
 
 // Delete an expense
 router.delete('/:id', expenseController.deleteExpenseById);
+
 
 module.exports = router;
