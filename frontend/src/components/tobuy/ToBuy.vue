@@ -10,14 +10,21 @@
             </button>
         </div>
     
-        <input 
-            autofocus
-            class="add-task"
-            placeholder="Add a new task"
-            @keyup.enter="addTodo"
-            v-model = "tobuyObject.name"
-        > 
 
+            <input 
+                autofocus
+                class="add-task"
+                placeholder="Add a new task"
+                @keyup.enter="addTodo"
+                v-model = "tobuyObject.name"
+            > 
+            <div class="selectDiv"> Category
+                <select class="selectList" id="category" v-model="tobuyObject.category">
+                    <option v-for="category in categories" :key="category">
+                    {{ category }}
+                    </option>
+                </select>
+            </div>
 
 
         <div v-for="todo in filteredTodos" :key="todo._id" class="todo-item">
@@ -42,13 +49,29 @@
                     type: Object,
                     default: () => ({
                         name: "",
+                        category: "",
                         date: new Date().toISOString().substr(0, 10),
                     }),
                 }
             },
-            data() {               
+            data() {                
                 return {
                     todos: [],
+                    categories: [
+                        "Alimentation",
+                        "Hébergement",
+                        "Transport",
+                        "Divertissement",
+                        "Vêtements",
+                        "Soins de santé",
+                        "Loisirs",
+                        "Éducation",
+                        "Impôts",
+                        "Assurances",
+                        "Investissements",
+                        "Dons",
+                        "Autres",
+                    ],
                     showAll: false,
                 }
             },
@@ -65,6 +88,11 @@
                 }
               },
           methods: {
+
+                async selectCategory(){
+
+                },
+
                 async getAll(){
                     try{
                         const response = await api.get("/todos");
@@ -86,10 +114,7 @@
                     e.target.value = ''
                 },
                 async removeTodo(todo) {
-                    
                     this.todos.splice(this.todos.indexOf(todo), 1);
-                    console.log(todo._id);
-                    console.log("fff");
                     await api.delete(`/todos/${todo._id}`);
                 }
           }
@@ -135,7 +160,21 @@
           background-color: rgb(100, 100, 100);
           padding: 4px 8px;
       }
-  
+      
+      .selectList{
+        background-color: black;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          color: white;
+          margin: 8px 0px;
+      }
+
+      .selectList::placeholder{
+        font-size: 14px;
+        color: black;
+
+      }
+
       .add-task {
           padding: 8px;
           font-size: 14px;
