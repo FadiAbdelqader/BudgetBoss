@@ -21,11 +21,14 @@
             </div>
             <div>
                 <div class="childSelect">
-                    <select class="selectList" id="category" v-model="tobuyObject.category">
+                    <select class="selectList" id="category" v-model="tobuyObject.category" required>
                         <option v-for="category in categories" :key="category">
                         {{ category }}
                         </option>
                     </select>
+                </div>
+                <div v-if="!tobuyObject.category">
+                  Please select an option.
                 </div>
             </div>
         </div>
@@ -75,6 +78,7 @@
                         "Autres",
                     ],
                     showAll: false,
+                    selected:false
                 }
             },
             async created() {
