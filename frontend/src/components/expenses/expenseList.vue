@@ -1,5 +1,5 @@
 <template>
-  <dev>
+  <dev width="auto">
     <div>
       <h1>Liste des dépenses</h1>
     </div>
