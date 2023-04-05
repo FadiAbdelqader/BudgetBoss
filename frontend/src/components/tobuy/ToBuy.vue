@@ -1,5 +1,5 @@
 <template>
-    <dev>
+    <dev width="auto">
         <h1>
             To-Buy List
         </h1>
@@ -11,27 +11,30 @@
         </div>
         <div class="parentSelectInput">
             <div class="childInput">
-                <input 
+                <input
                     autofocus
                     class="add-task"
                     placeholder="Add a new task"
                     @keyup.enter="addTodo"
                     v-model = "tobuyObject.name"
-                > 
+                >
             </div>
             <div>
-                <div class="childSelect"> 
-                    <select class="selectList" id="category" v-model="tobuyObject.category">
+                <div class="childSelect">
+                    <select class="selectList" id="category" v-model="tobuyObject.category" required>
                         <option v-for="category in categories" :key="category">
                         {{ category }}
                         </option>
                     </select>
                 </div>
+                <div v-if="!tobuyObject.category">
+                  Please select an option.
+                </div>
             </div>
         </div>
         <div v-for="todo in filteredTodos" :key="todo._id" class="todo-item">
             <label class="checkbox-container">
-                <input 
+                <input
                     type="checkbox"
                     v-model="todo.completed"
                     >
@@ -39,10 +42,10 @@
             </label>
             <p :class="{ completed: todo.completed }"> {{ todo.name }} </p>
             <button @click="removeTodo(todo)" class="delete-button"> X </button>
-        </div> 
+        </div>
     </dev>
   </template>
-  
+
   <script>
     import api from "../api/api";
       export default {
@@ -56,7 +59,7 @@
                     }),
                 }
             },
-            data() {                
+            data() {
                 return {
                     todos: [],
                     categories: [
@@ -75,12 +78,13 @@
                         "Autres",
                     ],
                     showAll: false,
+                    selected:false
                 }
             },
             async created() {
                 await this.getAll();
             },
-  
+
           computed: {
                 filteredTodos() {
                     return this.showAll ? this.todos : this.todos.filter((t) => !t.completed)
@@ -102,7 +106,7 @@
                     }
                     catch(e){
                         console.log(e)
-                    } 
+                    }
                 },
                 async addTodo(e){
                     const value = e.target.value.trim()
@@ -122,14 +126,14 @@
           }
       }
   </script>
-  
-  
-  
+
+
+
   <style scoped>
 
     @import '../../assets/baseToBuy.css';
     h1 {
-        font-weight: bold; 
+        font-weight: bold;
         color: white;
         padding: 8px 16px;
         background-color: rgb(57, 57, 57);
@@ -145,13 +149,13 @@
         align-items: center;
         margin-bottom: 8px;
       }
-  
+
       .tasks-left-text {
         color: white;
         text-align: left;
         margin-bottom: 6px;
       }
-  
+
       .determine-todos {
           font-family: Verdana, sans-serif;
           align-self: center;
@@ -162,7 +166,7 @@
           background-color: rgb(100, 100, 100);
           padding: 4px 8px;
       }
-      
+
       .selectList{
         background-color: black;
           border: 1px solid #ccc;
@@ -187,17 +191,17 @@
           color: white;
           margin: 8px 0px;
       }
-  
+
       .add-task::placeholder {
           font-size: 14px;
           text-align: center;
       }
-  
+
       .add-task:focus {
           border: solid white;
           border-width: 1px;
-      } 
-  
+      }
+
       .todo-item {
           display: flex;
           justify-content: space-between;
@@ -207,9 +211,9 @@
           padding: 16px;
           color: white;
       }
-  
+
       /* Customising checkbox guide https://www.w3schools.com/howto/howto_css_custom_checkbox.asp */
-      
+
       /* Customise checkbox container */
       .checkbox-container {
           display: block;
@@ -223,7 +227,7 @@
           -ms-user-select: none;
           user-select: none;
       }
-  
+
       /* Hide default checkbox */
       .checkbox-container input {
           position: absolute;
@@ -232,7 +236,7 @@
           height: 0;
           width: 0;
       }
-      
+
       /* Create a custom checkbox */
       .checkbox {
           height: 25px;
@@ -242,26 +246,26 @@
           top: 0;
           left: 0;
       }
-  
+
       .checkbox-container:hover input ~ .checkbox {
           background-color: rgb(65, 65, 65);
       }
-  
+
       .checkbox-container input:checked ~ .checkbox {
           background-color: rgb(55, 55, 55);
       }
-  
+
       .checkbox:after {
           content: "";
           position: absolute;
           display: none;
       }
-  
+
       /* Show the checkbox when checked */
       .checkbox-container input:checked ~ .checkbox:after {
           display: block;
       }
-  
+
       /* Style the checkbox */
       .checkbox-container .checkbox:after {
           left: 9px;
@@ -279,7 +283,7 @@
           text-decoration-thickness: 3px;
           color: #ccc;
       }
-  
+
       .delete-button {
           border: none;
           font-weight: bold;
@@ -294,7 +298,7 @@
         text-align: center;
         }
         .childInput {
-        width:100%; 
+        width:100%;
         display: inline-block;
         padding: 1rem 1rem;
         vertical-align: middle;
