@@ -241,10 +241,3 @@ export default {
 <style>
 @import "../../assets/budgetTracker/btracker.css";
 </style>
-
-def knapsack_2d(n, P, V, weights, volumes, utilities): # Initialiser le tableau à deux
-dimensions F = [[0 for j in range(V+1)] for i in range(P+1)] for k in range(n): # Boucler
-sur tous les sous-problèmes for E in range(P+1): for U in range(V+1): # Si l'objet k peut
-être ajouté au sac à dos 1 ou 2 if weights[k] <= E or volumes[k] <= U: # Mettre à jour la
-valeur du sous-problème courant F[E][U] = max(F[E][U], utilities[k] + F[max(0,
-E-weights[k])][max(0, U-volumes[k])])
