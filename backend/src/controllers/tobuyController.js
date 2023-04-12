@@ -1,4 +1,6 @@
+/* eslint-disable no-undef */
 const Tobuy = require('../models/tobuy');
+const Expense = require('../models/expense');
 
 exports.getAllTobuys = async (req, res) => {
     try {
@@ -37,17 +39,45 @@ exports.getAllTobuys = async (req, res) => {
     }
   };
 
+  // exports.deleteTobuyByID = async (req, res) => {
+  //   let tobuy;
+  //   try {
+  //     tobuy = await Tobuy.findById(req.params.id);
+  //     if (tobuy == null) {
+  //       return res.status(404).json({ message: 'Tobuy not found' });
+  //     }
+  
+  //     await tobuy.deleteOne();
+  //     res.json({ message: 'Tobuy deleted' });
+  //   } catch (err) {
+  //     res.status(500).json({ message: err.message });
+  //   }
+  // };
+
+
   exports.deleteTobuyByID = async (req, res) => {
-    let tobuy;
     try {
-      tobuy = await Tobuy.findById(req.params.id);
+      const tobuy = await Tobuy.findById(req.params.id);
       if (tobuy == null) {
         return res.status(404).json({ message: 'Tobuy not found' });
       }
+      // Create an expense from the tobuy data
+      const expense = new Expense({
+        name: tobuy.name,
+        amount: 100, // Set the amount to zero for now
+        category: tobuy.category,
+        date: new Date(),
+      });
   
+      // Save the new expense
+      await expense.save();
+      // Delete the tobuy
       await tobuy.deleteOne();
-      res.json({ message: 'Tobuy deleted' });
+  
+      // Return the new expense
+      res.json({ message: 'Tobuy deleted and expense created', expense: expense });
     } catch (err) {
+      console.log("zebbi");
       res.status(500).json({ message: err.message });
     }
   };
