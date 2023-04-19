@@ -1,0 +1,63 @@
+select {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  button {
+   /* display: block;
+    margin: 0 auto;
+    width: 50%;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;*/
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: #6c757d;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  button:hover {
+    background-color: #5a6268;
+  }
+  
+  .liste_carburants {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    max-width: 800px; /* ajuster la largeur selon les besoins */
+  }
+  
+  .liste_carburants ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .liste_carburants li {
+    font-size: 24px; /* ajuster la taille de police selon les besoins */
+    margin: 10px 0;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+  }
+  

@@ -1,0 +1,55 @@
+/* Centrer le titre h2 */
+h2 {
+    text-align: center;
+  }
+
+/* Afficher les boutons l'un à côté de l'autre */
+button {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  /* Style pour les cartes de station */
+  .station {
+    background-color: #000;
+    color: #fff; /* Ajout de la couleur blanche pour le texte */
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .station p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .station ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .station ul li {
+    margin: 5px 0;
+    padding: 0;
+  }
+  
+  .station ul li div {
+    margin-left: 20px;
+  }
+  .button_prix, .button_allprix {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .boutons {
+  width: 30%; /* Définir la largeur souhaitée */
+  margin: 0 auto; /* Centrer horizontalement */
+}
+.titre_boutons {
+    width: 50%; /* Largeur souhaitée */
+    margin: 0 auto; /* Marge automatique à gauche et à droite */
+  }
+  
