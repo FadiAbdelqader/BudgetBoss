@@ -4,6 +4,8 @@ import ExpenseList from '../components/expenses/expenseList.vue';
 import ToBuy from '../components/tobuy/ToBuy.vue'
 import ExpenseResume from '../components/expenses/expenseResume.vue'
 
+import Comparator from "../components/comparator/comparator.vue";
+import Results from "../components/comparator/results.vue";
 
 Vue.use(Router);
 
@@ -27,6 +29,15 @@ export default new Router({
       meta: {
         title:'To Buy List'
       }
+    },
+    {
+      path: "/comparator",
+      component: Comparator 
+    },
+    { 
+      path: "/results/:region/:carburant",
+      name: "results", 
+      component: Results 
     }
   ]
 });

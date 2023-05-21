@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const expenseRoutes = require('./src/routes/expenseRoutes');
 const tobuyRoutes = require('./src/routes/tobuyRoutes');
 const pdfResumeRoutes = require('./src/routes/pdfResumeRoutes');
+const comparatorRoute = require('./src/routes/comparatorRoute');
 const cors = require('cors');
 
 const app = express();
@@ -26,7 +27,9 @@ app.use(bodyParser.json());
 app.use('/todos', tobuyRoutes);
 app.use('/expenses', expenseRoutes);
 app.use('/test', pdfResumeRoutes);
+app.use('/compare', comparatorRoute);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
+
