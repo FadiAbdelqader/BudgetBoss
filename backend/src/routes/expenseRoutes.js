@@ -20,5 +20,7 @@ router.patch('/:id', expenseController.updateExpenseById);
 // Delete an expense
 router.delete('/:id', expenseController.deleteExpenseById);
 
+// Generate expense report
+router.get('/report/pdf', expenseController.downloadExpenseReport);
 
 module.exports = router;

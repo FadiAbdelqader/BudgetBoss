@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const expenseRoutes = require('./src/routes/expenseRoutes');
 const tobuyRoutes = require('./src/routes/tobuyRoutes');
+const pdfResumeRoutes = require('./src/routes/pdfResumeRoutes');
 const cors = require('cors');
 
 const app = express();
@@ -24,6 +25,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(bodyParser.json());
 app.use('/todos', tobuyRoutes);
 app.use('/expenses', expenseRoutes);
+app.use('/test', pdfResumeRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
